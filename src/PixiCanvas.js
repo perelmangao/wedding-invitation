@@ -1,5 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import * as PIXI from 'pixi.js';
+import invitationContainer from './component/invitation';
+import openingContainer from './component/opening';
+import schoolContainer from './component/school';
+import weddingContainer from './component/wedding';
+import rsvpContainer from './component/rsvp';
 
 const PixiCanvas = () => {
   const [currentScene, setCurrentScene] = useState(0);
@@ -15,12 +20,12 @@ const PixiCanvas = () => {
 
   const handleTouchMove = (e) => {
     const deltaY = e.global.y - startY.current
-    globalOffset.current += deltaY
+    globalOffset.current -= deltaY
     if (globalOffset.current < 0) {
       globalOffset.current = 0
     }
-    if (globalOffset.current > 3 * window.innerHeight) {
-      globalOffset.current = 3 * window.innerHeight
+    if (globalOffset.current > 4 * window.innerHeight) {
+      globalOffset.current = 4 * window.innerHeight
     }
     setSceneVisible(globalOffset.current)
     startY.current = e.global.y
@@ -31,45 +36,47 @@ const PixiCanvas = () => {
     width: window.innerWidth,
     height: window.innerHeight,
     backgroundColor: 0xAAAAAA,
+    resizeTo: window
   });
   app.view.id = 'test'
-
-  const scene1 = new PIXI.Container();
-  const scene2 = new PIXI.Container();
-  const scene3 = new PIXI.Container();
   
   // 向场景中添加内容
-  scene1.addChild(new PIXI.Text("Scene 1", { fontSize: 48, fill: 0xffffff }));
-  scene2.addChild(new PIXI.Text("Scene 2", { fontSize: 48, fill: 0xffffff }));
-  scene3.addChild(new PIXI.Text("Scene 3", { fontSize: 48, fill: 0xffffff }));
-
+  openingContainer.addChild(new PIXI.Text("openingContainer", { fontSize: 48, fill: 0xffffff }));
+  schoolContainer.addChild(new PIXI.Text("schoolContainer", { fontSize: 48, fill: 0xffffff }));
+  weddingContainer.addChild(new PIXI.Text("weddingContainer", { fontSize: 48, fill: 0xffffff }));
+  rsvpContainer.addChild(new PIXI.Text("rsvpContainer", { fontSize: 48, fill: 0xffffff }));
   // 设置场景位置
-  scene1.y = 0;
-  scene2.y = 0
-  scene3.y = 0
-  scene2.visible = false
-  scene3.visible = false
+  openingContainer.visible = false
+  schoolContainer.visible = false
+  weddingContainer.visible = false
+  rsvpContainer.visible = false
 
   // 添加场景到PixiJS舞台
-  app.stage.addChild(scene1);
-  app.stage.addChild(scene2);
-  app.stage.addChild(scene3);
+  app.stage.addChild(invitationContainer);
+  app.stage.addChild(openingContainer);
+  app.stage.addChild(schoolContainer);
+  app.stage.addChild(weddingContainer);
+  app.stage.addChild(rsvpContainer);
 
   const setSceneVisible = (offset) => {
 
-    if ((offset / window.innerHeight) <= 1) {
-      app.stage.children[0].visible = true
-      app.stage.children[1].visible = false
-      app.stage.children[2].visible = false
-    } else if ((offset / window.innerHeight) > 1 && (offset / window.innerHeight) <= 2) {
-      app.stage.children[0].visible = false
-      app.stage.children[1].visible = true
-      app.stage.children[2].visible = false
-    } else {
-      app.stage.children[0].visible = false
-      app.stage.children[1].visible = false
-      app.stage.children[2].visible = true
-  }
+    const currentIndex = Math.floor(offset / window.innerHeight)
+    app.stage.children.forEach((e, i) => {
+      e.visible = i === currentIndex
+    })
+  //   if (Math.floor(offset / window.innerHeight) <= 1) {
+  //     app.stage.children[0].visible = true
+  //     app.stage.children[1].visible = false
+  //     app.stage.children[2].visible = false
+  //   } else if ((offset / window.innerHeight) > 1 && (offset / window.innerHeight) <= 2) {
+  //     app.stage.children[0].visible = false
+  //     app.stage.children[1].visible = true
+  //     app.stage.children[2].visible = false
+  //   } else {
+  //     app.stage.children[0].visible = false
+  //     app.stage.children[1].visible = false
+  //     app.stage.children[2].visible = true
+  // }
 }
 
   useEffect(() => {
