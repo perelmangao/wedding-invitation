@@ -60,6 +60,9 @@ const PixiCanvas = () => {
   PIXI.Assets.add('rsvpInfo', texturePaths[13])
   PIXI.Assets.add('rsvpjo', texturePaths[14])
   PIXI.Assets.add('rsvpjo2', texturePaths[15])
+  PIXI.Assets.add('wearemarried', texturePaths[16])
+  PIXI.Assets.add('nameCard', texturePaths[17])
+  PIXI.Assets.add('peachBg', texturePaths[18])
 
   const texturesPromise = PIXI.Assets.load(
     [
@@ -78,7 +81,10 @@ const PixiCanvas = () => {
       'rsvpCouple',
       'rsvpInfo',
       'rsvpjo',
-      'rsvpjo2'
+      'rsvpjo2',
+      'wearemarried',
+      'nameCard',
+      'peachBg'
     ],
     (progress) => {
       console.log(progress)
@@ -93,12 +99,14 @@ const PixiCanvas = () => {
       textures.keyuOpening,
       textures.openingJo,
       textures.peiwenOpening,
+      textures.nameCard
     ])
 
     schoolContainer = createSchoolContainer([
       textures.campusScene,
       textures.campusSmile,
-      textures.campusCouple
+      textures.campusCouple,
+      textures.wearemarried
     ])
 
     weddingContainer = createWeddingContainer([
@@ -107,7 +115,8 @@ const PixiCanvas = () => {
       textures.weddingHeart,
       textures.weddingHeart2,
       textures.weddingDress,
-      textures.weddingHappy
+      textures.weddingHappy,
+      textures.peachBg
     ])
 
     rsvpContainer = createRsvpContainer([

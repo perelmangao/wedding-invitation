@@ -16,5 +16,8 @@ export const texturePaths = [
   'https://img.picgo.net/2023/09/19/rsvp-couplec4618815b318f17e.png',
   'https://img.picgo.net/2023/09/20/2023-09-19-0157209b76cf237e1d4e3a.png',
   'https://img.picgo.net/2023/09/20/RsvpJo26c26c561f39c39cc.png',
-  'https://img.picgo.net/2023/09/20/RsvpJo1f7781c823bb7f83.png'
+  'https://img.picgo.net/2023/09/20/RsvpJo1f7781c823bb7f83.png',
+  'https://img.picgo.net/2023/09/20/wearemarried945e9332293038f3.png',
+  'https://img.picgo.net/2023/09/20/nameCardba87fe04563d61eb.png',
+  'https://img.picgo.net/2023/09/20/peachBg4e158e3fc3a31c05.png'
 ]
