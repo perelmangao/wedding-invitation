@@ -5,7 +5,7 @@ import createOpeningContainer from './component/opening';
 import createSchoolContainer from './component/school';
 import createWeddingContainer from './component/wedding';
 import createRsvpContainer from './component/rsvp';
-import { texturePaths } from './params';
+import { texturePaths, musicPaths } from './params';
 
 let openingContainer, invitationContainer, schoolContainer, weddingContainer, rsvpContainer
 
@@ -42,7 +42,6 @@ const PixiCanvas = () => {
     resizeTo: window
   });
   app.view.id = 'test'
-
 
   PIXI.Assets.add('keyuOpening', texturePaths[0])
   PIXI.Assets.add('openingJo', texturePaths[1])
@@ -149,20 +148,7 @@ const PixiCanvas = () => {
     app.stage.children.forEach((e, i) => {
       e.visible = i === currentIndex
     })
-  //   if (Math.floor(offset / window.innerHeight) <= 1) {
-  //     app.stage.children[0].visible = true
-  //     app.stage.children[1].visible = false
-  //     app.stage.children[2].visible = false
-  //   } else if ((offset / window.innerHeight) > 1 && (offset / window.innerHeight) <= 2) {
-  //     app.stage.children[0].visible = false
-  //     app.stage.children[1].visible = true
-  //     app.stage.children[2].visible = false
-  //   } else {
-  //     app.stage.children[0].visible = false
-  //     app.stage.children[1].visible = false
-  //     app.stage.children[2].visible = true
-  // }
-}
+  }
 
   useEffect(() => {
 

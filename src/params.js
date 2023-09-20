@@ -21,3 +21,7 @@ export const texturePaths = [
   'https://img.picgo.net/2023/09/20/nameCardba87fe04563d61eb.png',
   'https://img.picgo.net/2023/09/20/peachBg4e158e3fc3a31c05.png'
 ]
+
+export const musicPaths = [
+  'https://perelmangao.github.io/blueming.mp3'
+]
