@@ -21,9 +21,6 @@ const createOpeningContainer = (textures) => {
     nameSprite.x = 0
     nameSprite.y = 0
 
-    
-    openingContainer.addChild(brideName)
-    openingContainer.addChild(groomName)
     openingContainer.addChild(brideSprite)
     openingContainer.addChild(groomSprite)
     openingContainer.addChild(jiuSprite)
