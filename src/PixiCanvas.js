@@ -158,26 +158,26 @@ const PixiCanvas = () => {
       })
     }
 
-    // if (offset > 50) {
-    //   app.stage.children.forEach((e, i) => {
-    //     e.visible = i === 1
-    //   })
-    // }
+    if (offset > 50) {
+      app.stage.children.forEach((e, i) => {
+        e.visible = i === 1
+      })
+    }
 
-    // if (offset > 400) {
-    //   app.stage.children.forEach((e, i) => {
-    //     e.visible = i === 2
-    //   })
-    // }
+    if (offset > 400) {
+      app.stage.children.forEach((e, i) => {
+        e.visible = i === 2
+      })
+    }
 
-    // if (offset > 800) {
-    //   app.stage.children.forEach((e, i) => {
-    //     e.visible = i === 3
-    //   })
-    //   app.renderer.backgroundColor = 'fff'
-    // }
+    if (offset > 800) {
+      app.stage.children.forEach((e, i) => {
+        e.visible = i === 3
+      })
+      app.renderer.backgroundColor = 'fff'
+    }
 
-    if (offset > 50) { // 1100
+    if (offset > 1100) { // 1100
       app.stage.children.forEach((e, i) => {
         e.visible = i === 4
       })
