@@ -10,7 +10,8 @@ import { texturePaths, musicPaths } from './params';
 let openingContainer, invitationContainer, schoolContainer, weddingContainer, rsvpContainer
 
 const PixiCanvas = () => {
-  const [currentScene, setCurrentScene] = useState(0);
+  // const [loadingProgress, setLoadingProgress] = useState(0);
+  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const startY = useRef(0);
   const appRef = useRef(null);
   const globalOffset = useRef(0)
@@ -94,6 +95,8 @@ const PixiCanvas = () => {
     ],
     (progress) => {
       console.log(progress)
+      // setLoadingProgress(Math.floor(progress * 100))
+      if (progress === 1) setIsLoadingComplete(true)
     }
   );
 
@@ -164,11 +167,17 @@ const PixiCanvas = () => {
         e.visible = i === 1 || i === 0
       })
       if (offset > 45 && offset < 245) {
+
+        // openingContainer child: openingBg,nameSprite,jiuSprite,brideSprite,groomSprite
         app.stage.children[1].x = 0
-        app.stage.children[1].y = (1 - (offset - 45) / 200) * window.innerHeight
+        app.stage.children[1].y = (1 - Math.floor((offset - 45) / 20) * (1 / 10)) * window.innerHeight
       }
       if (offset > 245) {
         app.stage.children[1].y = 0
+
+        app.stage.children[1].children[4].x = 10 * Math.floor((offset - 245) / 20)
+        app.stage.children[1].children[3].x = window.innerWidth - (window.innerWidth * (2 / 3)) - 10 * Math.floor((offset - 245) / 20)
+        // app.stage.children[1].children[5].rotation -= 0.1 * currentDirection
       }
       app.renderer.backgroundColor = 'fff'
     }
@@ -178,11 +187,30 @@ const PixiCanvas = () => {
         e.visible = i === 2 || i === 1
       })
       if (offset > 500  && offset < 700) {
-        app.stage.children[2].x = (1 - (offset - 500) / 200) * window.innerWidth
+        app.stage.children[2].x = (1.5 - Math.floor((offset - 500) / 20) * (1.5 / 10)) * window.innerWidth
         app.stage.children[2].y = 0
+        app.stage.children[2].children[3].x = (-1.5 + Math.floor((offset - 500) / 20) * (1.5 / 10)) * (window.innerWidth / 2)
+        app.stage.children[2].children[4].x = (-1.5 + Math.floor((offset - 500) / 20) * (1.5 / 10)) * (window.innerWidth / 2)
       }
       if (offset > 700) {
         app.stage.children[2].x = 0
+        app.stage.children[2].children[4].anchor.set(0, 0.1)
+        app.stage.children[2].children[4].rotation = Math.pow(-1, Math.floor((offset - 700) / 40)) * 0.1
+      }
+      if (offset > 700 && offset < 800) {
+        app.stage.children[2].children[1].visible = false
+        app.stage.children[2].children[2].visible = false
+        app.stage.children[2].children[3].visible = true
+      }
+      if (offset > 800) {
+        app.stage.children[2].children[1].visible = true
+        app.stage.children[2].children[2].visible = false
+        app.stage.children[2].children[3].visible = false
+      }
+      if (offset > 900) {
+        app.stage.children[2].children[1].visible = false
+        app.stage.children[2].children[2].visible = true
+        app.stage.children[2].children[3].visible = false
       }
       app.renderer.backgroundColor = 'fff'
     }
@@ -192,12 +220,43 @@ const PixiCanvas = () => {
         e.visible = i === 2
       })
       if (offset > 1000 && offset < 1200) {
-        app.stage.children[2].scale.set(Math.pow((offset / 1000), 2))
+        app.stage.children[2].scale.set(1 +  0.2 * Math.floor((offset - 1000) / 20))
       }
       if (offset > 1200) {
         app.stage.children.forEach((e, i) => {
           e.visible = i === 3
         })
+        app.stage.children[3].children[1].y = Math.floor((offset - 1200) / 20) * 20
+      }
+      if (offset > 1200 && offset < 1300) {
+        app.stage.children[3].children.map((e, i) => {
+          e.visible = i === 0 || i === 1
+        })
+      }
+      if (offset > 1300) {
+        app.stage.children[3].children.map((e, i) => {
+          e.visible = i === 0 || i === 2
+        })
+        app.stage.children[3].children[2].y = 200 - Math.floor((offset - 1200) / 20) * 20
+      }
+      if (offset > 1400) {
+        app.stage.children[3].children.map((e, i) => {
+          e.visible = i === 0 || i === 3
+        })
+        app.stage.children[3].children[3].y = Math.pow(-1, Math.floor((offset - 1400) / 20)) * 5 + 200
+        app.stage.children[3].children[3].x = -Math.pow(-1, Math.floor((offset - 1400) / 20)) * 5
+      }
+      if (offset > 1500) {
+        app.stage.children[3].children.map((e, i) => {
+          e.visible = i === 0 || i === 4
+        })
+        app.stage.children[3].children[4].y = Math.pow(-1, Math.floor((offset - 1400) / 20)) * 5 + 250
+      }
+      if (offset > 1600) {
+        app.stage.children[3].children.map((e, i) => {
+          e.visible = i === 0 || i === 5
+        })
+        app.stage.children[3].children[5].y = Math.pow(-1, Math.floor((offset - 1400) / 20)) * 5 + 250
       }
       app.renderer.backgroundColor = 'fff'
     }
@@ -238,7 +297,15 @@ const PixiCanvas = () => {
   }, [])
 
   return (
-    <div ref={appRef}></div>
+    <div>
+      {
+        !isLoadingComplete &&
+        <div>
+          <p>Loading... </p>
+        </div>
+      }
+      <div ref={appRef}></div>
+    </div>
   );
 };
 

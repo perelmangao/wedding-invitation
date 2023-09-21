@@ -55,6 +55,10 @@ const createWeddingContainer = (textures) => {
     weddingContainer.addChild(weddingDressSprite)
     weddingContainer.addChild(weddingHappySprite)
 
+    weddingContainer.children.map((e, i) => {
+        e.visible = i === 0 || i === 1
+    })
+
     return weddingContainer
 }
 

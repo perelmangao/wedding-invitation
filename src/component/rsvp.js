@@ -3,6 +3,9 @@ import { localLiveServerHost } from '../params';
 
 const createRsvpContainer = (textures) => {
   const rsvpContainer = new PIXI.Container()
+  const ticker = PIXI.Ticker.shared;
+  ticker.autoStart = true;
+  const beatInterval = 583
 
   const infoSprite = new PIXI.Sprite(textures[1])
   // infoSprite.x = window.innerWidth / 2
@@ -31,6 +34,26 @@ const createRsvpContainer = (textures) => {
   rsvpContainer.addChild(selfieSprite)
   rsvpContainer.addChild(jiuLeftSprite)
   rsvpContainer.addChild(jiuRightSprite)
+
+  jiuLeftSprite.rotation = 0.01
+  jiuRightSprite.rotation = 0.01
+  selfieSprite.rotation = 0.01
+  let interval
+  // 每帧更新文本内容
+  ticker.add(animate)
+  // 开始动画
+  function animate() {
+    if (!interval) {
+      interval = setInterval(() => {
+        jiuLeftSprite.rotation *= -1
+        jiuRightSprite.rotation *= -1
+        selfieSprite.rotation *= -1
+      }, beatInterval)
+    }
+  }
+  
+  // 启动动画
+  animate();
 
   return rsvpContainer
 }

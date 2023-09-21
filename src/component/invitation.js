@@ -10,11 +10,33 @@ const createInvitationContainer = (textures) => {
   peachBgSprite.y = 0
 
   const text = new PIXI.Text('', {
+    fontFamily: 'Monaco',
     fontSize: 36,
-    fill: 0xffffff,
+    fontWeight: 'bold',
+    fill: ['#ffffff', '#ffffff'], // gradient
+    wordWrap: true,
+    wordWrapWidth: 440,
+    lineJoin: 'round',
+  });
+
+  const demo = new PIXI.Text('Invitation. ', {
+    fontFamily: 'Monaco',
+    fontSize: 36,
+    fontWeight: 'bold',
+    fill: ['#ffffff', '#00ff99'], // gradient
+    stroke: '#4a1850',
+    strokeThickness: 5,
+    dropShadow: true,
+    dropShadowColor: '#000000',
+    dropShadowBlur: 4,
+    dropShadowAngle: Math.PI / 6,
+    dropShadowDistance: 6,
+    wordWrap: true,
+    wordWrapWidth: 440,
+    lineJoin: 'round',
   });
   
-  text.x = 50;
+  text.x = window.innerWidth / 2 - demo.width / 2;
   text.y = 150;
   
   const message = "Invitation. ";

@@ -17,13 +17,13 @@ const createSchoolContainer = (textures) => {
     campusSmileSprite.height = (window.innerWidth * 0.75) * (618 / 412)
 
     const campusCoupleSprite = new PIXI.Sprite(textures[2])
-    campusCoupleSprite.x = 0
+    campusCoupleSprite.x = -window.innerWidth / 2
     campusCoupleSprite.y = 0
     campusCoupleSprite.width = window.innerWidth
     campusCoupleSprite.height = window.innerWidth * (618 / 412)
 
     const wearemarriedSprite = new PIXI.Sprite(textures[3])
-    wearemarriedSprite.x = 0
+    wearemarriedSprite.x = -window.innerWidth / 2
     wearemarriedSprite.y = 200
     wearemarriedSprite.width = window.innerWidth
     wearemarriedSprite.height = window.innerHeight
@@ -39,6 +39,8 @@ const createSchoolContainer = (textures) => {
     schoolContainer.addChild(campusSmileSprite)
     schoolContainer.addChild(campusCoupleSprite)
     schoolContainer.addChild(wearemarriedSprite)
+    schoolContainer.children[1].visible = false
+    schoolContainer.children[2].visible = false
 
     return schoolContainer
 }
