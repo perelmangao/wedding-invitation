@@ -41,7 +41,7 @@ const createWeddingContainer = (textures) => {
     weddingHappySprite.x = 0
     weddingHappySprite.y = 0
 
-    const weddingBg = new PIXI.Sprite(textures[5])
+    const weddingBg = new PIXI.Sprite(textures[6])
     weddingBg.width = window.innerWidth
     weddingBg.height = window.innerHeight
     weddingBg.x = 0

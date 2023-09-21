@@ -29,9 +29,9 @@ const createSchoolContainer = (textures) => {
     wearemarriedSprite.height = window.innerHeight
 
     const schoolBg = new PIXI.Sprite(textures[4])
-    schoolBg.x = 0
+    schoolBg.x = window.innerWidth - window.innerHeight * (519 / 390) / 2
     schoolBg.y = 0
-    schoolBg.width = window.innerWidth
+    schoolBg.width = window.innerHeight * (519 / 390)
     schoolBg.height = window.innerHeight
 
     schoolContainer.addChild(schoolBg)
