@@ -19,7 +19,10 @@ export const texturePaths = [
   'https://img.picgo.net/2023/09/20/RsvpJo1f7781c823bb7f83.png',
   'https://img.picgo.net/2023/09/20/wearemarried945e9332293038f3.png',
   'https://img.picgo.net/2023/09/20/nameCardba87fe04563d61eb.png',
-  'https://img.picgo.net/2023/09/20/peachBg4e158e3fc3a31c05.png'
+  'https://img.picgo.net/2023/09/20/peachBg4e158e3fc3a31c05.png',
+  'https://img.picgo.net/2023/09/21/openingBgdcdb7bd5982689ec.jpeg',
+  'https://img.picgo.net/2023/09/21/schoolBga9e3f2fdf9393c25.jpeg',
+  'https://img.picgo.net/2023/09/21/weddingBg7d1178884c1aea4a.jpeg'
 ]
 
 export const musicPaths = [

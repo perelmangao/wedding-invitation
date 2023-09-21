@@ -38,9 +38,10 @@ const PixiCanvas = () => {
   const app = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
-    backgroundColor: '#e6c694',
+    backgroundColor: 'fff',
     resizeTo: window
   });
+  window.app = app
   app.view.id = 'test'
 
   PIXI.Assets.add('keyuOpening', texturePaths[0])
@@ -62,6 +63,9 @@ const PixiCanvas = () => {
   PIXI.Assets.add('wearemarried', texturePaths[16])
   PIXI.Assets.add('nameCard', texturePaths[17])
   PIXI.Assets.add('peachBg', texturePaths[18])
+  PIXI.Assets.add('openingBg', texturePaths[19])
+  PIXI.Assets.add('schoolBg', texturePaths[20])
+  PIXI.Assets.add('weddingBg', texturePaths[21])
 
   const texturesPromise = PIXI.Assets.load(
     [
@@ -83,7 +87,10 @@ const PixiCanvas = () => {
       'rsvpjo2',
       'wearemarried',
       'nameCard',
-      'peachBg'
+      'peachBg',
+      'openingBg',
+      'schoolBg',
+      'weddingBg'
     ],
     (progress) => {
       console.log(progress)
@@ -92,20 +99,24 @@ const PixiCanvas = () => {
 
   texturesPromise.then ((textures) => {
 
-    invitationContainer = createInvitationContainer()
+    invitationContainer = createInvitationContainer([
+      textures.peachBg
+    ])
 
     openingContainer = createOpeningContainer([
       textures.keyuOpening,
       textures.openingJo,
       textures.peiwenOpening,
-      textures.nameCard
+      textures.nameCard,
+      textures.openingBg
     ])
 
     schoolContainer = createSchoolContainer([
       textures.campusScene,
       textures.campusSmile,
       textures.campusCouple,
-      textures.wearemarried
+      textures.wearemarried,
+      textures.schoolBg
     ])
 
     weddingContainer = createWeddingContainer([
@@ -115,19 +126,16 @@ const PixiCanvas = () => {
       textures.weddingHeart2,
       textures.weddingDress,
       textures.weddingHappy,
-      textures.peachBg
+      textures.weddingBg
     ])
 
     rsvpContainer = createRsvpContainer([
       textures.rsvpCouple,
-      textures.rsvpInfo
+      textures.rsvpInfo,
+      textures.rsvpjo,
+      textures.rsvpjo2
     ])
 
-    // 向场景中添加内容
-    openingContainer.addChild(new PIXI.Text("openingContainer", { fontSize: 48, fill: 0xffffff }));
-    schoolContainer.addChild(new PIXI.Text("schoolContainer", { fontSize: 48, fill: 0xffffff }));
-    weddingContainer.addChild(new PIXI.Text("weddingContainer", { fontSize: 48, fill: 0xffffff }));
-    rsvpContainer.addChild(new PIXI.Text("rsvpContainer", { fontSize: 48, fill: 0xffffff }));
     // 设置场景位置
     openingContainer.visible = false
     schoolContainer.visible = false
@@ -144,10 +152,37 @@ const PixiCanvas = () => {
 
   const setSceneVisible = (offset) => {
 
-    const currentIndex = Math.floor(offset / window.innerHeight)
-    app.stage.children.forEach((e, i) => {
-      e.visible = i === currentIndex
-    })
+    if (offset <= 50) {
+      app.stage.children.forEach((e, i) => {
+        e.visible = i === 0
+      })
+    }
+
+    // if (offset > 50) {
+    //   app.stage.children.forEach((e, i) => {
+    //     e.visible = i === 1
+    //   })
+    // }
+
+    // if (offset > 400) {
+    //   app.stage.children.forEach((e, i) => {
+    //     e.visible = i === 2
+    //   })
+    // }
+
+    // if (offset > 800) {
+    //   app.stage.children.forEach((e, i) => {
+    //     e.visible = i === 3
+    //   })
+    //   app.renderer.backgroundColor = 'fff'
+    // }
+
+    if (offset > 50) { // 1100
+      app.stage.children.forEach((e, i) => {
+        e.visible = i === 4
+      })
+      app.renderer.backgroundColor = '#e6c694'
+    }
   }
 
   useEffect(() => {

@@ -3,6 +3,12 @@ import * as PIXI from 'pixi.js';
 const createInvitationContainer = (textures) => {
   const invitationContainer = new PIXI.Container()
 
+  const peachBgSprite = new PIXI.Sprite(textures[0])
+  peachBgSprite.width = window.innerWidth
+  peachBgSprite.height = window.innerHeight
+  peachBgSprite.x = 0
+  peachBgSprite.y = 0
+
   const text = new PIXI.Text('', {
     fontSize: 36,
     fill: 0xffffff,
@@ -42,6 +48,7 @@ const createInvitationContainer = (textures) => {
     }
   
   
+  invitationContainer.addChild(peachBgSprite)
   invitationContainer.addChild(text)
 
   return invitationContainer
