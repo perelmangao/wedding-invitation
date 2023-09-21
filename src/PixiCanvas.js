@@ -156,18 +156,21 @@ const PixiCanvas = () => {
       app.stage.children.forEach((e, i) => {
         e.visible = i === 0
       })
+      app.renderer.backgroundColor = 'fff'
     }
 
     if (offset > 50) {
       app.stage.children.forEach((e, i) => {
         e.visible = i === 1
       })
+      app.renderer.backgroundColor = 'fff'
     }
 
     if (offset > 400) {
       app.stage.children.forEach((e, i) => {
         e.visible = i === 2
       })
+      app.renderer.backgroundColor = 'fff'
     }
 
     if (offset > 800) {
