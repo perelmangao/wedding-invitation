@@ -22,7 +22,8 @@ export const texturePaths = [
   'https://img.picgo.net/2023/09/20/peachBg4e158e3fc3a31c05.png',
   'https://img.picgo.net/2023/09/21/openingBgdcdb7bd5982689ec.jpeg',
   'https://img.picgo.net/2023/09/21/schoolBga9e3f2fdf9393c25.jpeg',
-  'https://img.picgo.net/2023/09/21/weddingBg7d1178884c1aea4a.jpeg'
+  'https://img.picgo.net/2023/09/21/weddingBg7d1178884c1aea4a.jpeg',
+  'https://img.picgo.net/2023/09/22/jobubble4482a7e0311cd96d.png'
 ]
 
 export const musicPaths = [

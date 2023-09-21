@@ -6,12 +6,13 @@ import createSchoolContainer from './component/school';
 import createWeddingContainer from './component/wedding';
 import createRsvpContainer from './component/rsvp';
 import { texturePaths, musicPaths } from './params';
+import gsap from 'gsap';
 
 let openingContainer, invitationContainer, schoolContainer, weddingContainer, rsvpContainer
 
 const PixiCanvas = () => {
   // const [loadingProgress, setLoadingProgress] = useState(0);
-  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+  // const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const startY = useRef(0);
   const appRef = useRef(null);
   const globalOffset = useRef(0)
@@ -20,6 +21,27 @@ const PixiCanvas = () => {
 
   const handleTouchStart = (e) => {
     startY.current = e.global.y
+
+    const clickX = e.global.x;
+    const clickY = e.global.y;
+    const texture = PIXI.Texture.from(texturePaths[22])
+
+    // 创建冒气泡的精灵
+    const bubble = new PIXI.Sprite(texture); // 替换为气泡纹理的路径
+    bubble.width = 64
+    bubble.height = 64
+    bubble.anchor.set(0.5, 1); // 设置锚点在底部中心
+    bubble.x = clickX;
+    bubble.y = clickY;
+
+    // 将精灵添加到舞台
+    app.stage.addChild(bubble);
+
+    // 使用TweenMax或其他动画库创建向上冒气泡的动画
+    gsap.to(bubble, 1.5, { y: bubble.y - 200, alpha: 0, onComplete: () => {
+        // 在动画完成后从舞台上移除精灵
+        app.stage.removeChild(bubble);
+    }});
   };
 
   const handleTouchMove = (e) => {
@@ -67,6 +89,7 @@ const PixiCanvas = () => {
   PIXI.Assets.add('openingBg', texturePaths[19])
   PIXI.Assets.add('schoolBg', texturePaths[20])
   PIXI.Assets.add('weddingBg', texturePaths[21])
+  PIXI.Assets.add('joBubble', texturePaths[22])
 
   const texturesPromise = PIXI.Assets.load(
     [
@@ -91,12 +114,24 @@ const PixiCanvas = () => {
       'peachBg',
       'openingBg',
       'schoolBg',
-      'weddingBg'
+      'weddingBg',
+      'joBubble'
     ],
     (progress) => {
       console.log(progress)
-      // setLoadingProgress(Math.floor(progress * 100))
-      if (progress === 1) setIsLoadingComplete(true)
+      const progressContainer = document.getElementById('progressContainer');
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      
+      progressBar.style.width = `${progress * 100}%`;
+
+      // 更新数字文本
+      progressText.textContent = `Loading...${Math.round(progress * 100)}%`;
+    
+      // 检查是否达到1，如果达到则隐藏进度条
+      if (progress >= 1) {
+        progressContainer.style.display = 'none';
+      }
     }
   );
 
@@ -299,9 +334,9 @@ const PixiCanvas = () => {
   return (
     <div>
       {
-        !isLoadingComplete &&
-        <div>
-          <p>Loading... </p>
+        <div id="progressContainer">
+          <div id="progressBar"></div>
+          <span id="progressText">0%</span>
         </div>
       }
       <div ref={appRef}></div>
