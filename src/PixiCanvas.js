@@ -152,7 +152,7 @@ const PixiCanvas = () => {
 
   const setSceneVisible = (offset) => {
 
-    if (offset <= 75) {
+    if (offset <= 245) {
       app.stage.children.forEach((e, i) => {
         e.visible = i === 0 
       })
@@ -163,38 +163,46 @@ const PixiCanvas = () => {
       app.stage.children.forEach((e, i) => {
         e.visible = i === 1 || i === 0
       })
-      if (offset > 45 && offset < 75) {
+      if (offset > 45 && offset < 245) {
         app.stage.children[1].x = 0
-        app.stage.children[1].y = (1 - (offset - 45) / 30) * window.innerHeight
+        app.stage.children[1].y = (1 - (offset - 45) / 200) * window.innerHeight
       }
-      if (offset > 75) {
+      if (offset > 245) {
         app.stage.children[1].y = 0
       }
       app.renderer.backgroundColor = 'fff'
     }
 
-    if (offset > 400) {
+    if (offset > 500) {
       app.stage.children.forEach((e, i) => {
         e.visible = i === 2 || i === 1
       })
-      if (offset > 400  && offset < 430) {
-        app.stage.children[2].x = (1 - (offset - 400) / 30) * window.innerWidth
+      if (offset > 500  && offset < 700) {
+        app.stage.children[2].x = (1 - (offset - 500) / 200) * window.innerWidth
         app.stage.children[2].y = 0
       }
-      if (offset > 430) {
+      if (offset > 700) {
         app.stage.children[2].x = 0
       }
       app.renderer.backgroundColor = 'fff'
     }
 
-    if (offset > 800) {
+    if (offset > 1000) {
       app.stage.children.forEach((e, i) => {
-        e.visible = i === 3
+        e.visible = i === 2
       })
+      if (offset > 1000 && offset < 1200) {
+        app.stage.children[2].scale.set(Math.pow((offset / 1000), 2))
+      }
+      if (offset > 1200) {
+        app.stage.children.forEach((e, i) => {
+          e.visible = i === 3
+        })
+      }
       app.renderer.backgroundColor = 'fff'
     }
 
-    if (offset > 1100) { // 1100
+    if (offset > 1700) { // 1100
       app.stage.children.forEach((e, i) => {
         e.visible = i === 4
       })

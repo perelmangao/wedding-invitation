@@ -42,10 +42,10 @@ const createWeddingContainer = (textures) => {
     weddingHappySprite.y = 0
 
     const weddingBg = new PIXI.Sprite(textures[6])
-    weddingBg.width = window.innerWidth
-    weddingBg.height = window.innerHeight
-    weddingBg.x = 0
+    weddingBg.x = (window.innerWidth - window.innerHeight * (390 / 586)) / 2
     weddingBg.y = 0
+    weddingBg.width = window.innerHeight * (390 / 586)
+    weddingBg.height = window.innerHeight
     
     weddingContainer.addChild(weddingBg)
     weddingContainer.addChild(weddingFireworkSprite)

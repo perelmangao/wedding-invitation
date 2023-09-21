@@ -28,16 +28,18 @@ const createOpeningContainer = (textures) => {
     nameSprite.height = window.innerWidth * 2
 
     const openingBg = new PIXI.Sprite(textures[4])
-    openingBg.x = 0
+    openingBg.x = -window.innerWidth + window.innerHeight * (390 / 519) / 2
     openingBg.y = 0
-    openingBg.width = window.innerWidth
+    openingBg.width = window.innerHeight * (390 / 519)
     openingBg.height = window.innerHeight
 
     openingContainer.addChild(openingBg)
+    openingContainer.addChild(nameSprite)
+    openingContainer.addChild(jiuSprite)
     openingContainer.addChild(brideSprite)
     openingContainer.addChild(groomSprite)
-    openingContainer.addChild(jiuSprite)
-    openingContainer.addChild(nameSprite)
+
+
 
     return openingContainer
 }
