@@ -34,9 +34,9 @@ const createOpeningContainer = (textures) => {
     nameSprite.height = window.innerWidth * 2
 
     const openingBg = new PIXI.Sprite(textures[4])
-    openingBg.x = -window.innerWidth + window.innerHeight * (390 / 519) / 2
+    openingBg.x = (window.innerWidth - window.innerHeight * (508 / 677)) / 2
     openingBg.y = 0
-    openingBg.width = window.innerHeight * (390 / 519)
+    openingBg.width = window.innerHeight * (508 / 677)
     openingBg.height = window.innerHeight
 
     openingContainer.addChild(openingBg)

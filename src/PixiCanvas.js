@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as PIXI from 'pixi.js';
 import createInvitationContainer from './component/invitation';
 import createOpeningContainer from './component/opening';
@@ -8,7 +8,9 @@ import createRsvpContainer from './component/rsvp';
 import { texturePaths, musicPaths } from './params';
 import gsap from 'gsap';
 
-let openingContainer, invitationContainer, schoolContainer, weddingContainer, rsvpContainer
+let openingContainer, invitationContainer, schoolContainer, weddingContainer, rsvpContainer, mockTouchInterval
+let mockOffset = 0
+let mockEngaged = false
 
 const PixiCanvas = () => {
   // const [loadingProgress, setLoadingProgress] = useState(0);
@@ -42,9 +44,28 @@ const PixiCanvas = () => {
         // 在动画完成后从舞台上移除精灵
         app.stage.removeChild(bubble);
     }});
+
+    if (!mockTouchInterval & !mockEngaged) {
+      mockTouchInterval = setInterval(() => {
+        if (mockEngaged) return
+        mockOffset++
+        if (mockOffset > 1700) {
+          clearInterval(mockTouchInterval)
+        }
+    
+        setSceneVisible(mockOffset)
+      }, 10)
+    }
   };
 
   const handleTouchMove = (e) => {
+    if(mockTouchInterval) {
+      mockTouchInterval = null
+      clearInterval(mockTouchInterval)
+      mockEngaged = true
+      globalOffset.current = mockOffset
+    }
+
     const deltaY = e.global.y - startY.current
     globalOffset.current -= deltaY * 0.5
     if (globalOffset.current < 0) {
@@ -55,7 +76,6 @@ const PixiCanvas = () => {
     }
     setSceneVisible(globalOffset.current)
     startY.current = e.global.y
-    console.log('globalOffset', globalOffset)
   };
 
   const app = new PIXI.Application({
