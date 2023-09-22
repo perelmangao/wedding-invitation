@@ -46,7 +46,7 @@ const PixiCanvas = () => {
 
   const handleTouchMove = (e) => {
     const deltaY = e.global.y - startY.current
-    globalOffset.current -= deltaY
+    globalOffset.current -= deltaY * 0.5
     if (globalOffset.current < 0) {
       globalOffset.current = 0
     }
